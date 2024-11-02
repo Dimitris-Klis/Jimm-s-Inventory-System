@@ -1,0 +1,13 @@
+#Unity files
+Jimm's Inventory System/Library/
+Jimm's Inventory System/Logs/
+Jimm's Inventory System/Temp/
+Jimm's Inventory System/UserSettings/
+
+#Visual Studio folders
+Jimm's Inventory System/.vs/
+
+#Visual Studio files
+Jimm's Inventory System/.vsconfig
+Jimm's Inventory System/*.sln
+Jimm's Inventory System/*.csproj
