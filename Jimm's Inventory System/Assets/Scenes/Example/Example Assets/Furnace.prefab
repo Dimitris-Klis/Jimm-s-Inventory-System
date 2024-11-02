@@ -194,8 +194,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  InteractionButtonName: Interact
+  InteractionButtonName: Inventory
   interactableName: Furnace
+  InventoryRelated: 1
 --- !u!1 &8549605934572598654
 GameObject:
   m_ObjectHideFlags: 0

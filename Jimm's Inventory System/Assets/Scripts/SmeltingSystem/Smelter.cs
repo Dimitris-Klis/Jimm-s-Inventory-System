@@ -29,6 +29,7 @@ public class Smelter : MonoBehaviour
     /// </summary>
     public void OpenSmelter()
     {
+        if (InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this) return;
         InventoryUIHandler.instance.smeltingSystem.OpenSmelter(this);
         InventoryUIHandler.instance.OpenInventoryWithSmelter();
         InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
@@ -59,8 +60,11 @@ public class Smelter : MonoBehaviour
             //set smelting to true
             smelting = true;
             //Update slots and sliders
-            InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
-            InventoryUIHandler.instance.smeltingSystem.SetMaxProgress_UI(currentRecipe.CookTime);
+            if (InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this)
+            {
+                InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
+                InventoryUIHandler.instance.smeltingSystem.SetMaxProgress_UI(currentRecipe.CookTime);
+            }
         }
     }
     // Update is called once per frame
@@ -77,8 +81,11 @@ public class Smelter : MonoBehaviour
                 //Remove 1 item from the fuel slot.
                 Fuel.amount--;
                 //Update slots and sliders.
-                InventoryUIHandler.instance.smeltingSystem.SetMaxFuel_UI(Fuel.item.FuelTime);
-                InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
+                if (InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this)
+                {
+                    InventoryUIHandler.instance.smeltingSystem.SetMaxFuel_UI(Fuel.item.FuelTime);
+                    InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
+                }
             }
             //Otherwise if there's fuel and the output is available
             if (FuelAmount > 0 &&
@@ -86,8 +93,12 @@ public class Smelter : MonoBehaviour
                 (Output.item == currentRecipe.Result && Output.amount + currentRecipe.ResultAmount <= currentRecipe.Result.StackSize)))
             {
                 //Update sliders
-                InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
-                InventoryUIHandler.instance.smeltingSystem.SetFuel_UI(FuelAmount);
+                if(InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this)
+                {
+                    InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
+                    InventoryUIHandler.instance.smeltingSystem.SetFuel_UI(FuelAmount);
+                }
+                
                 //Progress goes up
                 ProgressAmount += Time.deltaTime;
                 //Fuel goes down
@@ -99,11 +110,15 @@ public class Smelter : MonoBehaviour
                     //Add item to output
                     Output.item = currentRecipe.Result;
                     Output.amount += currentRecipe.ResultAmount;
-                    //Update Slots
-                    InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
                     //Reset progress to 0 and Update Progress Slider
                     ProgressAmount = 0;
-                    InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
+                    if (InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this)
+                    {
+                        //Update Slots & Progress Slider
+                        InventoryUIHandler.instance.smeltingSystem.UpdateSlotsUI(this);
+
+                        InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
+                    }
                     smelting = false;
                 }
             }

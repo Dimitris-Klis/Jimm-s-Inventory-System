@@ -52,7 +52,9 @@ public class InventoryUIHandler : MonoBehaviour
     public string CraftingUIName = "CraftingUI";
     public string HotbarUIName = "HotbarUI";
 
-    bool open;
+    public bool CanOpenInventory;
+    public Interactable tempInteractable;
+    bool shouldopen;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +64,7 @@ public class InventoryUIHandler : MonoBehaviour
         }
         GetGroup(HotbarUIName).Activate(true);
         hotbarSystem.SelectionOutline.enabled = true;
-        BackgroundImage.enabled = open;
+        BackgroundImage.enabled = shouldopen;
     }
     public void OpenInventoryWithChest()
     {
@@ -70,8 +72,8 @@ public class InventoryUIHandler : MonoBehaviour
         GetGroup(ChestUIName).Activate(true);
         GetGroup(HotbarUIName).Activate(false);
         hotbarSystem.SelectionOutline.enabled = false;
-        open = true;
-        BackgroundImage.enabled = open;
+        shouldopen = true;
+        BackgroundImage.enabled = shouldopen;
     }
     public void OpenInventoryWithSmelter()
     {
@@ -79,8 +81,8 @@ public class InventoryUIHandler : MonoBehaviour
         GetGroup(SmeltingUIName).Activate(true);
         GetGroup(HotbarUIName).Activate(false);
         hotbarSystem.SelectionOutline.enabled = false;
-        open = true;
-        BackgroundImage.enabled = open;
+        shouldopen = true;
+        BackgroundImage.enabled = shouldopen;
     }
     public void OpenInventoryWithCrafting(string crafting)
     {
@@ -89,36 +91,37 @@ public class InventoryUIHandler : MonoBehaviour
         craftingSystem.OpenCrafting(crafting);
         GetGroup(HotbarUIName).Activate(false);
         hotbarSystem.SelectionOutline.enabled = false;
-        open = true;
-        BackgroundImage.enabled = open;
+        shouldopen = true;
+        BackgroundImage.enabled = shouldopen;
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown(InventoryButton)/* && !PauseMenu.instance.paused*/)
         {
-            open = !open;
+            shouldopen = !shouldopen;
 
-            if (open)
+            if (shouldopen)
             {
-                OpenInventory();
+                if(CanOpenInventory)
+                    OpenInventory();
             }
             else
             {
                 CloseInventory();
             }
         }
-        if (Input.GetButtonDown(EscapeButton) && open)
+        if (Input.GetButtonDown(EscapeButton) && shouldopen)
         {
             //PauseMenu.instance.canpause = false;
             //PauseMenu.instance.Invoke(nameof(PauseMenu.instance.DeCanPauseify), .1f);
-            open = false;
+            shouldopen = false;
             CloseInventory();
         }
     }
     void OpenInventory()
     {
-        BackgroundImage.enabled = open;
+        BackgroundImage.enabled = shouldopen;
         GetGroup(InventoryUIName).Activate(true);
         GetGroup(CraftingUIName).Activate(true);
         craftingSystem.OpenCrafting(DefaultCraftingStation);
@@ -127,7 +130,7 @@ public class InventoryUIHandler : MonoBehaviour
     }
     void CloseInventory()
     {
-        BackgroundImage.enabled = open;
+        BackgroundImage.enabled = shouldopen;
         inventorySystem.ReturnItem();
         GetGroup(InventoryUIName).Activate(false);
         GetGroup(CraftingUIName).Activate(false);
@@ -137,6 +140,12 @@ public class InventoryUIHandler : MonoBehaviour
         GetGroup(HotbarUIName).Activate(true);
         hotbarSystem.SelectionOutline.enabled = true;
         Tooltip.instance.CloseTooltip();
+        smeltingSystem.selectedSmelter = null;
+        if (tempInteractable != null)
+        {
+            tempInteractable.enabled = true;
+            tempInteractable = null;
+        }
     }
     /// <summary>
     /// This simplifies enabling and disabling Inventory UI.
@@ -156,6 +165,6 @@ public class InventoryUIHandler : MonoBehaviour
     }
     public bool IsOpen()
     {
-        return open;
+        return shouldopen;
     }
 }

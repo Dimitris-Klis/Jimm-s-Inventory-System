@@ -12,6 +12,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent OnInteract;
     public string InteractionButtonName;
     public string interactableName = "Workbench";
+    public bool InventoryRelated;
     //bool ShownPrompt;
     bool HidPrompt;
     private void OnDrawGizmosSelected()
@@ -32,7 +33,14 @@ public class Interactable : MonoBehaviour
             if (Input.GetButtonDown(InteractionButtonName))
             {
                 OnInteract.Invoke();
+                if (InventoryRelated)
+                {
+                    Prompter.instance.HidePrompt();
+                    InventoryUIHandler.instance.tempInteractable = this;
+                    this.enabled = false;
+                }
             }
+            InventoryUIHandler.instance.CanOpenInventory = false;
         }
         else
         {
@@ -41,6 +49,7 @@ public class Interactable : MonoBehaviour
                 Prompter.instance.HidePrompt();
                 //ShownPrompt=false;
                 HidPrompt = true;
+                InventoryUIHandler.instance.CanOpenInventory = true;
             }
         }
     }

@@ -50,6 +50,7 @@ public class ChestSystem : MonoBehaviour
         }
         slots.Clear();
         InventoryUIHandler.instance.GetGroup(InventoryUIHandler.instance.ChestUIName).Activate(false);
+        CurrentChest = null;
         openChest = false;
     }
 }

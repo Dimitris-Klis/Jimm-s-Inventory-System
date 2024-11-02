@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour
     public List<InventorySystem.InventoryItem> items;
     public void OpenChest()
     {
+        if (InventoryUIHandler.instance.chestSystem.CurrentChest == this) return;
         InventoryUIHandler.instance.chestSystem.OpenChest(this);
     }
 }
