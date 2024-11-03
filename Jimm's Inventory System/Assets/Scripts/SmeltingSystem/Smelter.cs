@@ -16,7 +16,7 @@ public class Smelter : MonoBehaviour
     public Sprite NormalFurnace;
     public Sprite LitFurnace;
     SmeltingRecipe[] recipes;
-    bool smelting;
+    bool smelting = false;
 
     private void Start()
     {
@@ -31,8 +31,15 @@ public class Smelter : MonoBehaviour
     {
         if (InventoryUIHandler.instance.smeltingSystem.selectedSmelter == this) return;
         InventoryUIHandler.instance.smeltingSystem.OpenSmelter(this);
+
         InventoryUIHandler.instance.OpenInventoryWithSmelter();
         InventoryUIHandler.instance.smeltingSystem.SetProgress_UI(ProgressAmount);
+
+        if(currentRecipe != null)
+            InventoryUIHandler.instance.smeltingSystem.SetMaxProgress_UI(currentRecipe.CookTime);
+        else
+            InventoryUIHandler.instance.smeltingSystem.SetMaxProgress_UI(1);
+        
         InventoryUIHandler.instance.smeltingSystem.SetFuel_UI(FuelAmount);
     }
 

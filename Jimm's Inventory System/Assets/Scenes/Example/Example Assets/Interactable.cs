@@ -37,7 +37,9 @@ public class Interactable : MonoBehaviour
                 {
                     Prompter.instance.HidePrompt();
                     InventoryUIHandler.instance.tempInteractable = this;
+                    InventoryUIHandler.instance.Invoke(nameof(InventoryUIHandler.instance.EnableInventoryOpening), .1f);
                     this.enabled = false;
+                    return;
                 }
             }
             InventoryUIHandler.instance.CanOpenInventory = false;

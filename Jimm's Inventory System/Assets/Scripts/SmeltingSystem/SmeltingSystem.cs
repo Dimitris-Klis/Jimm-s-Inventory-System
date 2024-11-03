@@ -18,7 +18,7 @@ public class SmeltingSystem : MonoBehaviour
     public List<SmeltingRecipe> CurrentWorkbenchRecipes = new();
     bool openSmelter;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Load all smelting recipes.
         recipes = Resources.LoadAll<SmeltingRecipe>("Smelting Recipes");
@@ -95,13 +95,14 @@ public class SmeltingSystem : MonoBehaviour
             //  -There's enough space on the output
             if
                 (
-                    cwr.Ingredient.item == InputSlot.Item.item &&
-                    cwr.Ingredient.amount <= InputSlot.Item.amount &&
-                    (OutputSlot.Item.item == cwr.Result &&
+                    cwr.Ingredient.item == InputSlot.Item.item && //Recipe Ingredient = Input Ingredient.
+                    cwr.Ingredient.amount <= InputSlot.Item.amount && // Recipe Ingredient Amount <= Input Amount.
+                    (OutputSlot.Item.item == cwr.Result && // Output = Recipe Output OR Output is empty.
                     OutputSlot.Item.amount + cwr.ResultAmount <= cwr.Result.StackSize) || (OutputSlot.Item.item == null || OutputSlot.Item.amount == 0)
                 )
             {
                 //Initiate the smelting process and return.
+                selectedSmelter.currentRecipe = cwr;
                 selectedSmelter.Smelt();
                 return;
             }

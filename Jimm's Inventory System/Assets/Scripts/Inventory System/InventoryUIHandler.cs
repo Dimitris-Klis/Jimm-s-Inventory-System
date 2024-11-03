@@ -83,6 +83,8 @@ public class InventoryUIHandler : MonoBehaviour
         hotbarSystem.SelectionOutline.enabled = false;
         shouldopen = true;
         BackgroundImage.enabled = shouldopen;
+
+        Debug.Log("Opened!");
     }
     public void OpenInventoryWithCrafting(string crafting)
     {
@@ -94,17 +96,20 @@ public class InventoryUIHandler : MonoBehaviour
         shouldopen = true;
         BackgroundImage.enabled = shouldopen;
     }
+    public void EnableInventoryOpening()
+    {
+        CanOpenInventory = true;
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown(InventoryButton)/* && !PauseMenu.instance.paused*/)
+        if (Input.GetButtonDown(InventoryButton)/* && !PauseMenu.instance.paused*/ && CanOpenInventory)
         {
             shouldopen = !shouldopen;
 
             if (shouldopen)
             {
-                if(CanOpenInventory)
-                    OpenInventory();
+               OpenInventory();
             }
             else
             {
