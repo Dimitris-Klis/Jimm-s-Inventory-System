@@ -95,8 +95,23 @@ As you can see in the image below, only 3 items appear in the chest, since we on
 
 ![image](https://github.com/user-attachments/assets/9f1aa24c-5e1b-40b2-b2f0-1924bb076dc9)
 
-Anyway, I think that covers everything. Let me know if I need to cover anything. \
-Also, heads up: The code is by no means perfect and has way too many comments.
+### The Hotbar:
+
+All you need to worry about is the `Default Event` & the `Actions` array.
+
+`Actions` takes `Items` & `UnityEvents`. If the selected item in the hotbar is in `Actions`, its `UnityEvent` is triggered. \
+Otherwise, if there is no such item in `Actions`, the `Default Event` is triggered instead.
+
+In short, every item you select will trigger a `UnityEvent`.
+It's by no means the best way of handling item selection, but it works and allows for easy customizability, albeit a bit tedious.
+
+![image](https://github.com/user-attachments/assets/7e278ff1-3af6-47fd-a145-08473257f9b8)
+
+
+
+Anyway, I think that covers everything.
+
+Heads up: The code is by no means perfect and has way too many comments (I found out that that's a bad coding practice a little too late and I can't be bothered to change it ¯\ &#95; (ツ) &#95; /¯ ).
 
 ### Extras:
 There's a useful Example Scene under `Scenes\Example` and some extra stuff in `Scenes\Example\Example Assets`.
