@@ -5,16 +5,20 @@ using UnityEngine;
 public class Smelter : MonoBehaviour
 {
     public string WorkstationName;
+    [Space]
     public InventorySystem.InventoryItem Input;
     public InventorySystem.InventoryItem Fuel;
     public InventorySystem.InventoryItem Output;
-
+    [Space]
     public float FuelAmount;
     public float ProgressAmount;
+    [Space]
     public SmeltingRecipe currentRecipe;
-    public SpriteRenderer furnace_renderer;
-    public Sprite NormalFurnace;
-    public Sprite LitFurnace;
+    [Space]
+    public SpriteRenderer SmelterRenderer;
+    public Sprite NormalSmelter;
+    public Sprite LitSmelter;
+    [Space]
     SmeltingRecipe[] recipes;
     bool smelting = false;
 
@@ -79,7 +83,7 @@ public class Smelter : MonoBehaviour
     {
         if (smelting)
         {
-            furnace_renderer.sprite = LitFurnace;
+            SmelterRenderer.sprite = LitSmelter;
             //If fuelAmount runs out and there's still fuel in the fuel slot.
             if (FuelAmount <= 0 && Fuel.amount > 0 && Fuel.item != null && Fuel.item.Fuel)
             {
@@ -135,7 +139,7 @@ public class Smelter : MonoBehaviour
             //If QueuedSmelting is 0 and nothingthere is false, try smelting.
             if (CanSmelt(Input.item))
                 Smelt();
-            else furnace_renderer.sprite = NormalFurnace;
+            else SmelterRenderer.sprite = NormalSmelter;
         }
     }
     bool CanSmelt(Item item)

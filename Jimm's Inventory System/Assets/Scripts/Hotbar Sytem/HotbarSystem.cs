@@ -9,8 +9,9 @@ public class HotbarSystem : MonoBehaviour
     public Transform slotsParent;
     public List<InventorySlot> slots = new();
     public int SelectedSlot;
-    public UnityEvent DefaultEvent;
     public Image SelectionOutline;
+    [Space]
+    public UnityEvent DefaultEvent;
     [System.Serializable]
     public class Action
     {

@@ -44,7 +44,9 @@ public class InventorySystem : MonoBehaviour
     public SlotColors slotColors;
     List<InventorySlot> slots = new();
     InventorySlot MouseSlot;
-    [Space(30)]
+    [Space]
+
+    [Tooltip("The items the player will start with.")]
     public InventorySlotItem[] itemsToAdd;
 
     //Movable Items.+

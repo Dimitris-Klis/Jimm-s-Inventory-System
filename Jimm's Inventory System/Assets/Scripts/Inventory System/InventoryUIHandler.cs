@@ -45,7 +45,7 @@ public class InventoryUIHandler : MonoBehaviour
 
     [Tooltip("What crafting default station will open when you open your inventory?")]
     [SerializeField] string DefaultCraftingStation = "Crafting";
-
+    [Space]
     public string InventoryUIName = "InventoryUI";
     public string ChestUIName = "ChestUI";
     public string SmeltingUIName = "SmeltingUI";
@@ -84,7 +84,7 @@ public class InventoryUIHandler : MonoBehaviour
         shouldopen = true;
         BackgroundImage.enabled = shouldopen;
 
-        Debug.Log("Opened!");
+        //Debug.Log("Opened!");
     }
     public void OpenInventoryWithCrafting(string crafting)
     {

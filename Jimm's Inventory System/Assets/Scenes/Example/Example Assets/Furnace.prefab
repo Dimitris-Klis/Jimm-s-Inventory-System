@@ -160,9 +160,9 @@ MonoBehaviour:
   FuelAmount: 0
   ProgressAmount: 0
   currentRecipe: {fileID: 0}
-  furnace_renderer: {fileID: 8549605934572598626}
-  NormalFurnace: {fileID: -532421436, guid: 707d85c4df3b5454b8ebdb77d78c0eed, type: 3}
-  LitFurnace: {fileID: -152815322, guid: 707d85c4df3b5454b8ebdb77d78c0eed, type: 3}
+  SmelterRenderer: {fileID: 8549605934572598626}
+  NormalSmelter: {fileID: -532421436, guid: 707d85c4df3b5454b8ebdb77d78c0eed, type: 3}
+  LitSmelter: {fileID: -152815322, guid: 707d85c4df3b5454b8ebdb77d78c0eed, type: 3}
 --- !u!114 &-1849047052778843250
 MonoBehaviour:
   m_ObjectHideFlags: 0
