@@ -52,7 +52,7 @@ public class InventoryUIHandler : MonoBehaviour
     public string CraftingUIName = "CraftingUI";
     public string HotbarUIName = "HotbarUI";
 
-    public bool CanOpenInventory;
+    public bool CanOpenInventory = true;
     public Interactable tempInteractable;
     bool shouldopen;
     // Start is called before the first frame update

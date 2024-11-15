@@ -2727,6 +2727,8 @@ MonoBehaviour:
   SmeltingUIName: SmeltingUI
   CraftingUIName: CraftingUI
   HotbarUIName: HotbarUI
+  CanOpenInventory: 1
+  tempInteractable: {fileID: 0}
 --- !u!114 &8056738738558845452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,6 +2745,7 @@ MonoBehaviour:
   slotsParent: {fileID: 8056738737992993179}
   slots: []
   SelectedSlot: 0
+  SelectionOutline: {fileID: 8056738738502017991}
   DefaultEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2758,7 +2761,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  SelectionOutline: {fileID: 8056738738502017991}
   actions: []
 --- !u!1 &8056738738563594800
 GameObject:
